@@ -3,14 +3,17 @@ import styles from "../styles/Calculator.module.scss";
 
 export default function CalculatorPage() {
   return (
-    <div className={styles.container}>
-      <main className={styles.main}>
+    <>
+      <div className={styles.container}>
+        <main className={styles.main}>
 
-        <h1>Easy Quant - Calculator</h1>
 
-        <Calculator />
+          <h1>Easy Quant - Calculator</h1>
 
-      </main>
-    </div>
+          <Calculator />
+
+        </main>
+      </div>
+    </>
   )
 }
