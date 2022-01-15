@@ -1,9 +1,8 @@
+/* eslint-disable @next/next/no-img-element */
 import Head from "next/head";
-import Image from "next/image";
 import Router from "next/router";
 import { FormEvent, useState } from "react";
 
-import BitCoinImage from "../../public/bitcoin.jpeg";
 import { api } from "../services/api";
 import styles from "../styles/Home.module.scss";
 
@@ -76,7 +75,7 @@ export default function Home() {
         </Head>
         <div className={styles.main}>
           <div className={styles.banner}>
-            <Image src={BitCoinImage} alt="Bitcoin" objectFit="scale-down" />
+            <img src="../../bitcoin.jpeg" alt="Bitcoin" />
           </div>
           <form className={styles.form} onSubmit={e => handleLogin(e)}  >
             <h1>Login to use the calculator</h1>
