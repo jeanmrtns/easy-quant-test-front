@@ -1,0 +1,62 @@
+.main {
+  display: flex;
+  min-height: 100vh;
+  overflow: hidden;
+
+  @media screen and (max-width: 980px) { 
+    .banner {
+      display: none;
+    }
+
+    .form {
+      min-width: 100vw;
+    }
+  } 
+  
+  .banner {
+    width: 60vw;  
+    height: 100vh;
+  }
+
+  .form {
+    padding: 1rem;
+    max-width: 40vw;
+    width: 100%;
+    background-color: var(--white);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+
+    input, button {
+      width: 100%;
+      max-width: 50rem;
+      padding: 1rem 0.5rem;
+      border-radius: 0.25rem;
+    }
+
+    input {
+      padding: 1rem 1.25rem;
+      border: 1px solid var(--gray-300);
+      outline-color: var(--yellow-500);
+    }
+
+    button {
+    background-color: var(--yellow-500);
+    color: var(--gray-700);
+    font-weight: bold;
+    transition: filter 0.3s;
+    border: 0;
+
+    &:not(:first-of-type) {
+      margin-top: 1rem;
+    }
+
+    &:hover {
+      filter: opacity(0.9);
+    }
+  }
+  }
+}
+
