@@ -10,6 +10,9 @@ npm run dev
 yarn dev
 ```
 
+# You must create a new .env.local using the .env.example variables.
+# The Database used for getting login informations is the MongoDB Atlas.
+
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
