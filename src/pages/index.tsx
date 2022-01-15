@@ -1,7 +1,7 @@
 import Head from "next/head";
 import Image from "next/image";
 import Router from "next/router";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 
 import BitCoinImage from "../../public/bitcoin.jpeg";
 import { api } from "../services/api";
@@ -28,7 +28,7 @@ export default function Home() {
 
   }
 
-  function handleLogin(e) {
+  function handleLogin(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     login();
   }
@@ -42,7 +42,7 @@ export default function Home() {
         <div className={styles.banner}>
           <Image src={BitCoinImage} alt="Bitcoin" objectFit="scale-down" />
         </div>
-        <form className={styles.form} onSubmit={handleLogin}  >
+        <form className={styles.form} onSubmit={e => handleLogin(e)}  >
           <h1>Login to use the calculator</h1>
 
           <input type="email" placeholder="Email" onChange={(event) => setCredentials({ ...credentials, email: event.target.value })} />
