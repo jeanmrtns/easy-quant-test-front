@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import Head from "next/head";
 import Router from "next/router";
 import { FormEvent, useState } from "react";
@@ -31,7 +30,6 @@ export default function Home() {
     )
     const response = await api.post(`${process.env.NEXT_PUBLIC_FRONT_URL}/api/user`, { params: credentials });
 
-
     if (!response.data) {
       toast.error('Invalid credentials!', {
         position: "top-right",
@@ -42,12 +40,12 @@ export default function Home() {
         draggable: true,
         progress: undefined,
       });
-
-      return;
+      Router.reload();
     }
 
-
-    Router.push('/calculator');
+    else {
+      Router.push('/calc');
+    }
 
   }
 

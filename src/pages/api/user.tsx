@@ -19,6 +19,6 @@ export default async function get(req: NextApiRequest, res: NextApiResponse): Pr
     return res.json(response);
 
   } catch (error) {
-    throw new Error('Invalid credentials' + error);
+    throw new Error('Invalid credentials');
   }
 }

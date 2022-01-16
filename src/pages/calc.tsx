@@ -1,7 +1,7 @@
 import { Calculator } from "../components/Calculator";
 import styles from "../styles/Calculator.module.scss";
 
-export default function CalculatorPage() {
+export default function Calc() {
   return (
     <div className={styles.container}>
       <main className={styles.main}>

@@ -17,8 +17,6 @@ interface CalcData {
   setOperation: (operation: string) => void;
   result: number;
   setResult: (result: number) => void;
-  handleSubmit: (event: FormEvent<HTMLFormElement>) => void;
-  handleOptionChange: (event) => void;
   clear: () => void;
   calculate: () => void;
 }
@@ -26,7 +24,7 @@ interface CalcData {
 const CalcContext = createContext({} as CalcData);
 
 export function CalcProvider({ children }: CalcProviderProps) {
-  const [operation, setOperation] = useState('sum');
+  const [operation, setOperation] = useState('');
 
   const [numbers, setNumbers] = useState({
     number1: 0,
@@ -35,14 +33,6 @@ export function CalcProvider({ children }: CalcProviderProps) {
 
   const [result, setResult] = useState(0);
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    calculate();
-  }
-
-  function handleOptionChange(event) {
-    setOperation(event.target.value);
-  }
 
   async function calculate() {
     try {
@@ -59,7 +49,7 @@ export function CalcProvider({ children }: CalcProviderProps) {
   }
 
   return (
-    <CalcContext.Provider value={{ operation, setOperation, result, setResult, handleSubmit, handleOptionChange, calculate, numbers, setNumbers, clear }}>
+    <CalcContext.Provider value={{ operation, setOperation, result, setResult, calculate, numbers, setNumbers, clear }}>
       {children}
     </CalcContext.Provider>
   )
