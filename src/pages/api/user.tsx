@@ -1,10 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { connectToDatabase } from "../../utils/mongodb";
 
-interface ResponseType {
-  message: string;
-}
-
 export default async function get(req: NextApiRequest, res: NextApiResponse): Promise<void> {
 
   const db = await connectToDatabase();
@@ -14,9 +10,14 @@ export default async function get(req: NextApiRequest, res: NextApiResponse): Pr
   try {
     const response = await db.collection('users').findOne({
       email, password
-    })
+    });
 
-    return res.json(response);
+    const data = {
+      email: response.email,
+      id: response._id
+    }
+
+    return res.json(data);
 
   } catch (error) {
     throw new Error('Invalid credentials');

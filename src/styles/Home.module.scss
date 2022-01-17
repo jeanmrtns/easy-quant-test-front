@@ -18,6 +18,7 @@
     height: 100vh;
   }
 
+  
   .form {
     padding: 1rem;
     max-width: 40vw;
@@ -28,6 +29,10 @@
     justify-content: center;
     align-items: center;
     gap: 0.5rem;
+    
+    h1 {
+      color: var(--yellow-500);
+    }
 
     input, button {
       width: 100%;
@@ -55,6 +60,11 @@
 
     &:hover {
       filter: opacity(0.9);
+    }
+
+    &[disabled] {
+      filter: opacity(0.8);
+      cursor: wait;
     }
   }
   }

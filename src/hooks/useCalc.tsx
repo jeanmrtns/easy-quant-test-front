@@ -1,4 +1,4 @@
-import { createContext, FormEvent, ReactNode, useContext, useState } from "react";
+import { createContext, ReactNode, useContext, useState } from "react";
 import { api } from "../services/api";
 
 interface Numbers {
@@ -17,7 +17,6 @@ interface CalcData {
   setOperation: (operation: string) => void;
   result: number;
   setResult: (result: number) => void;
-  clear: () => void;
   calculate: () => void;
 }
 
@@ -33,23 +32,20 @@ export function CalcProvider({ children }: CalcProviderProps) {
 
   const [result, setResult] = useState(0);
 
-
   async function calculate() {
+
+    if (!operation) return;
+
     try {
       const result = await api.post(`/calculator/${operation}`, numbers);
       setResult(result.data.result);
     } catch (error) {
-      alert('Invalid operation')
+      alert('Invalid operation');
     }
   }
 
-  function clear() {
-    setNumbers({ number1: 0, number2: 0 });
-    setResult(0);
-  }
-
   return (
-    <CalcContext.Provider value={{ operation, setOperation, result, setResult, calculate, numbers, setNumbers, clear }}>
+    <CalcContext.Provider value={{ operation, setOperation, result, setResult, calculate, numbers, setNumbers }}>
       {children}
     </CalcContext.Provider>
   )

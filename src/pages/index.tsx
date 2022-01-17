@@ -1,12 +1,11 @@
 import Head from "next/head";
-import Router from "next/router";
 import { FormEvent, useState } from "react";
 
-import { api } from "../services/api";
 import styles from "../styles/Home.module.scss";
 
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useAuth } from "../hooks/useAuth";
 
 interface ICredentials {
   email: string;
@@ -16,42 +15,12 @@ interface ICredentials {
 export default function Home() {
 
   const [credentials, setCredentials] = useState({} as ICredentials);
-  const [loading, setLoading] = useState(false);
 
-  async function login() {
-    setLoading(true);
-    const functionThatReturnPromise = () => new Promise(resolve => setTimeout(resolve, 3000));
-    toast.promise(
-      functionThatReturnPromise,
-      {
-        pending: 'Loading',
-        success: 'Loaded'
-      }
-    )
-    const response = await api.post(`${process.env.NEXT_PUBLIC_FRONT_URL}/api/user`, { params: credentials });
-
-    if (!response.data) {
-      toast.error('Invalid credentials!', {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: false,
-        draggable: true,
-        progress: undefined,
-      });
-      Router.reload();
-    }
-
-    else {
-      Router.push('/calc');
-    }
-
-  }
+  const { login, loading } = useAuth();
 
   function handleLogin(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    login();
+    if (credentials) login(credentials);
   }
 
   return (
@@ -78,8 +47,8 @@ export default function Home() {
           <form className={styles.form} onSubmit={e => handleLogin(e)}  >
             <h1>Login to use the calculator</h1>
 
-            <input type="email" placeholder="Email" onChange={(event) => setCredentials({ ...credentials, email: event.target.value })} />
-            <input type="password" placeholder="Password" onChange={(event) => setCredentials({ ...credentials, password: event.target.value })} />
+            <input type="email" placeholder="Email" required onChange={(event) => setCredentials({ ...credentials, email: event.target.value })} />
+            <input type="password" placeholder="Password" required onChange={(event) => setCredentials({ ...credentials, password: event.target.value })} />
             <button disabled={loading}>Login</button>
           </form>
         </div>

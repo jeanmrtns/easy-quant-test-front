@@ -4,7 +4,6 @@
 }
 
 .content {
-  background-color: #123;
 
   .display {
     background-color: var(--white);
@@ -27,14 +26,17 @@
   .buttons {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
+    gap: .1rem;
+    background-color: var(--white);
 
     button {
       padding: 1.25rem;
+      border-radius: 0.25rem;
       height: 5rem;
       background-color: var(--yellow-500);
       font-size: 1rem;
       cursor: pointer;
-
+      
       &.clear {
         background-color: var(--red-500);
       }

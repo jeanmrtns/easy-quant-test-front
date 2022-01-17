@@ -1,4 +1,7 @@
-import { useState } from 'react';
+import Router from 'next/router';
+import { parseCookies } from 'nookies';
+import { useEffect, useState } from 'react';
+import { useAuth } from '../../hooks/useAuth';
 import { useCalc } from '../../hooks/useCalc';
 import styles from './styles.module.scss';
 
@@ -12,10 +15,12 @@ export function Calculator() {
   const { numbers, operation, setOperation, result, setResult, setNumbers, calculate } = useCalc();
   const [displayOp, setDisplayOp] = useState('');
 
+  const { user } = useAuth();
+
   function handleOperation(event) {
     const op = event.target.value;
     setOperation(op);
-    switch (operation) {
+    switch (op) {
       case 'sum':
         setDisplayOp('+');
         break;
@@ -56,6 +61,14 @@ export function Calculator() {
       number2: 0
     } as Numbers);
   }
+
+  useEffect(() => {
+    const { 'calcauth': user } = parseCookies();
+
+    if (!user) {
+      Router.push('/');
+    }
+  });
 
   return (
     <div className={styles.container}>
